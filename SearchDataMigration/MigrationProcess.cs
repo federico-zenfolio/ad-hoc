@@ -51,6 +51,9 @@ namespace SearchDataMigration
                 Formatting = Formatting.Indented
             };
 
+            int count = 0;
+            int wait = 200;
+
             foreach (Guid photographerExternalId in photographersExternalIds)
             {
                 Console.WriteLine($"Sending to Service Bus -> 'ExternalCalendarConnected' event for Photographer User Id '{photographerExternalId.ToString()}'");
@@ -67,6 +70,12 @@ namespace SearchDataMigration
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
+                }
+                count++;
+                if (count % 200 == 0)
+                {
+                    Console.WriteLine($"!!!! WAITING {wait} ms..................... !!!");
+                    await Task.Delay(wait);
                 }
             }
 

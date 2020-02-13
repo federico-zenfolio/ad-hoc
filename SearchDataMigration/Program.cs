@@ -6,7 +6,9 @@ namespace SearchDataMigration
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var migrationProcess = new MigrationProcess();
+            migrationProcess.ProcessAsync().GetAwaiter().GetResult();
+            Console.ReadLine();
         }
     }
 }
